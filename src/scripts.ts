@@ -2,29 +2,15 @@ fetch('https://rickandmortyapi.com/api/character')
   .then((response) => response.json())
   .then((data) => console.log(data));
 
-// type Charactertypes = {
-//     id:number
-//     name: string,
-//     status: string,
-//     species: string; 
-//     types:string,
-//   }
-
-// let character:Charactertypes[] = [];
-
-// let fetchData = {
-//     method: 'POST',
-//     body: JSON.stringify(character),
-//     headers: new Headers({
-//       'Content-Type': 'application/json; charset=UTF-8'
-//     })
-//   }
 interface Values {
     name:string,
     status:string,
     location: string, 
+    //should add all interface from webpage
 }
+
 loadCards(0,6);
+
 function loadCards (a:number, b:number){
   fetch('https://rickandmortyapi.com/api/character')
     .then(response => response.json())
@@ -35,7 +21,6 @@ function loadCards (a:number, b:number){
       for (let i=a; i<b; i++){
       let episodeName = character.results[i].episode[0].substr(32).replace("/", " ");
         let status =character.results[i].status
-        
             if (status === 'Alive'){
                 data1+=`<div class="card">
                 <div class="card__picture">
@@ -82,8 +67,6 @@ function loadCards (a:number, b:number){
     document.querySelector('.cards').innerHTML= data1;
     }
     
-
- 
       }
     })
 
