@@ -1,28 +1,28 @@
 fetch('https://rickandmortyapi.com/api/character')
-  .then((response) => response.json())
-  .then((data) => console.log(data));
+    .then((response) => response.json())
+    .then((data) => console.log(data));
 
 interface Values {
-    name:string,
-    status:string,
-    location: string, 
+    name: string,
+    status: string,
+    location: string,
     //should add all interface from webpage
 }
 
-loadCards(0,6);
+loadCards(0, 6);
 
-function loadCards (a:number, b:number){
-  fetch('https://rickandmortyapi.com/api/character')
-    .then(response => response.json())
-    
-    .then((character) => {
-        let data1:string= "";
-        
-      for (let i=a; i<b; i++){
-      let episodeName = character.results[i].episode[0].substr(32).replace("/", " ");
-        let status =character.results[i].status
-            if (status === 'Alive'){
-                data1+=`<div class="card">
+function loadCards(a: number, b: number) {
+    fetch('https://rickandmortyapi.com/api/character')
+        .then(response => response.json())
+
+        .then((character) => {
+            let data1: string = "";
+
+            for (let i = a; i < b; i++) {
+                let episodeName = character.results[i].episode[0].substr(32).replace("/", " ");
+                let status = character.results[i].status
+                if (status === 'Alive') {
+                    data1 += `<div class="card">
                 <div class="card__picture">
                 <img src="${character.results[i].image}">
             </div>
@@ -35,9 +35,9 @@ function loadCards (a:number, b:number){
                 <p class="card--text2">${character.results[i].origin.name} <br> ${episodeName}  </p>
             </div>
         </div>`;
-            document.querySelector('.cards').innerHTML= data1;
-    } else  if (status === 'Dead'){
-        data1+=`<div class="card">
+                    document.querySelector('.cards').innerHTML = data1;
+                } else if (status === 'Dead') {
+                    data1 += `<div class="card">
         <div class="card__picture">
         <img src="${character.results[i].image}">
     </div>
@@ -50,8 +50,8 @@ function loadCards (a:number, b:number){
         <p class="card--text2">${character.results[i].origin.name} <br> ${episodeName}</p>
     </div>
     </div>`;
-    }else {
-        data1+=`<div class="card">
+                } else {
+                    data1 += `<div class="card">
         <div class="card__picture">
         <img src="${character.results[i].image}">
     </div>
@@ -64,22 +64,21 @@ function loadCards (a:number, b:number){
         <p class="card--text2">${character.results[i].origin.name} <br> ${episodeName} </p>
     </div>
     </div>`;
-    document.querySelector('.cards').innerHTML= data1;
-    }
-    
-      }
-    })
+                    document.querySelector('.cards').innerHTML = data1;
+                }
 
-.catch((error)=>{
-    console.log(error)
-})
+            }
+        })
+
+        .catch((error) => {
+            console.log(error)
+        })
 }
 
 const loadButton = document.querySelector<HTMLButtonElement | null>(".button--button");
-const loadButtonDiv =document.querySelectorAll<HTMLDivElement>(".button");
+const loadButtonDiv = document.querySelectorAll<HTMLDivElement>(".button");
 
-loadButton?.addEventListener("click", ()=>{
-    loadButton.style.display= 'none';
-    loadCards(0,20);
+loadButton?.addEventListener("click", () => {
+    loadButton.style.display = 'none';
+    loadCards(0, 20);
 })
-           
